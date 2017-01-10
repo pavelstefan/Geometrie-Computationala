@@ -5,6 +5,42 @@ function solution(){
         sortare input
     */
     
+    if(polygon1.length == polygon2.length){
+        var ok = true;
+        for(var i = 0; i < polygon1.length; i++){
+            if(polygon1[i] != polygon2[i]){
+                ok = false;
+                break;
+            }
+        }
+        if(ok){
+            points = polygon2;
+            return;
+        }
+    }
+    
+    var dif = prepareSort();
+    for(var i = 0; i < polygon1.length; i++){
+        for(var j = i + 1; j < polygon1.length; j++){
+            if(comapare(polygon1[i], polygon1[j]) > 0){
+                var x = polygon1[i];
+                polygon1[i] = polygon1[j];
+                polygon1[j] = x;
+            }
+        }
+    }
+    
+    for(var i = 0; i < polygon2.length; i++){
+        for(var j = i + 1; j < polygon2.length; j++){
+            if(comapare(polygon2[i], polygon2[j]) > 0){
+                var x = polygon2[i];
+                polygon2[i] = polygon2[j];
+                polygon2[j] = x;
+            }
+        }
+    }
+    abc({x: -dif.p1.x, y: -dif.p1.y}, {x: -dif.p2.x, y: -dif.p2.y});
+    
     /*
         gasesc dreptele de legatura
     */

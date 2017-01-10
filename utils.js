@@ -20,7 +20,8 @@ function comapare(p1, p2){
         return -1;
     if(a1 < a2)
         return 1;
-    return 0;
+    
+    return !((p1.x * p1.x + p1.y * p1.y) > (p2.x * p2.x + p2.y * p2.y));
 }
 
 function delta(p, q, r){
@@ -33,4 +34,49 @@ function delta(p, q, r){
     );
     
     return math.det(m);
+}
+
+function prepareSort(){
+    
+    var a = {
+            x: 0,
+            y: 0
+        },
+        b = {
+            x: 0,
+            y: 0
+        };
+    
+    
+    for(var i = 0; i < polygon1.length; i++){
+        a.x += polygon1[i].x;
+        a.y += polygon1[i].y;
+    }
+    a.x = a.x / polygon1.length;
+    a.y = a.y / polygon1.length;    
+    
+    for(var i = 0; i < polygon2.length; i++){
+        b.x += polygon2[i].x;
+        b.y += polygon2[i].y;
+    }
+    b.x = b.x / polygon2.length;
+    b.y = b.y / polygon2.length;
+    
+    abc(a, b);
+    
+    return {
+        p1: a,
+        p2: b
+    }
+}
+
+function abc(a, b){
+    for(var i = 0; i < polygon1.length; i++){
+        polygon1[i].x -= a.x;
+        polygon1[i].y -= a.y;
+    }
+    for(var i = 0; i < polygon2.length; i++){
+        polygon2[i].x -= b.x;
+        polygon2[i].y -= b.y;
+    }
 }
